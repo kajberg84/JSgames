@@ -9,10 +9,6 @@ export function hashThisPassword(password) {
 export class UserController {
     async create(req, res, next) {
         const { email, password } = req.body
-        console.log("-----")
-        console.log(req.body)
-        console.log(email, password)
-        console.log("-----")
 
         const newUser = new UserModel({
             email: email,
@@ -20,7 +16,7 @@ export class UserController {
             permissionLevel: 4,
             refToken: ""
         })
-        // spara till databas
+
         try {
             await newUser.save()
             res.status(201).json(newUser)

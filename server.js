@@ -22,6 +22,8 @@ const main = async () => {
     app.use("/", router)
 
     app.use((err, req, res, next) => {
+        console.log("server1", err.message)
+
         err.status = err.status || 500
         res.status(err.status).json({
             status: err.status,
