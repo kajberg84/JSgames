@@ -24,7 +24,7 @@ export class LoginController {
             });
         } catch (error) {
             console.log("error i login");
-            next(createError(403, error));
+            next(createError(403, "error login"));
         }
     }
 }

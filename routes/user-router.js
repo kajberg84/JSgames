@@ -1,15 +1,12 @@
 import express from 'express'
-import { friends } from '../utilities/users.js'
+import { UserController } from '../controller/user-controller.js'
 export const userRouter = express.Router()
+
+const controller = new UserController()
 
 //localhost:8080/login
 userRouter.get('/', (req, res, next) => {
     res.send("userRouter WORK")
 })
 
-userRouter.post('/information', (req, res, next) => {
-    console.log(req.query.name)
-    const friendObject = friends.find(friend => friend.name === req.query.name)
-    console.log(friendObject)
-    console.log(`${friendObject.name}'s favorite fruits are ${friendObject.likes.join(', ')}`)
-})
+userRouter.post('/', (req, res, next) => controller.create(req, res, next))
