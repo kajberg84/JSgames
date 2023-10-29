@@ -7,5 +7,10 @@
 4. localstorage / mongo db
 5. frontend for this app. react? svelte?
 
+
+add mongoose / mongodb
+controller
+models/schemas
 # add encrypting to password
 # create mongo db database
+add .env file
