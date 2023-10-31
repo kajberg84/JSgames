@@ -1,10 +1,6 @@
 import createError from "http-errors"
 import UserModel from "../models/user-model.js"
-
-export function hashThisPassword(password) {
-    // FIxa en hashfunction.
-    return password
-}
+import { hashPassword } from "../utilities/passwordHandler.js"
 
 export class UserController {
     async create(req, res, next) {
@@ -12,7 +8,7 @@ export class UserController {
 
         const newUser = new UserModel({
             email: email,
-            password: hashThisPassword(password),
+            password: hashPassword(password),
             permissionLevel: 4,
             refToken: ""
         })
@@ -24,6 +20,18 @@ export class UserController {
             console.log("error creating user", error.message)
             next(createError(403, error));
         }
-        // error handling
+    }
+
+    async getUser(req, res, next) {
+        try {
+            const userExists = await UserModel.findOne({ email: req.query.email })
+            console.log(userExists)
+            if (userExists) {
+                return res.status(204).json("User exists")
+            }
+            res.status(409).json("User dont exist")
+        } catch (error) {
+
+        }
     }
 }

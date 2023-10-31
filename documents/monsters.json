@@ -1,0 +1,19 @@
+{
+    "name": "pruloMaster",
+    "race": "Orcs",
+    "tier": "5",
+    "cost": "Standard",
+    "text": "Programming God",
+    "appearance": {
+        "size": "Large",
+        "color": "Green",
+        "eyes": "Red",
+        "horns": "True"
+    },
+    "abilities": {
+        "taunt": "True",
+        "shield": "True",
+        "reborn": "True",
+        "berserk": "True"
+    }
+}

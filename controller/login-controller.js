@@ -1,5 +1,5 @@
 import createError from 'http-errors'
-import { checkUserPassword } from '../utilities/passwordCheck.js'
+import { checkUserPassword } from '../utilities/passwordHandler.js'
 import UserModel from "../models/user-model.js"
 
 
