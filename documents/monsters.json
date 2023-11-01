@@ -2,13 +2,12 @@
     "name": "pruloMaster",
     "race": "Orcs",
     "tier": "5",
-    "cost": "Standard",
+    "health": "10",
+    "attack": "4",
+    "cost": "7",
     "text": "Programming God",
     "appearance": {
-        "size": "Large",
-        "color": "Green",
-        "eyes": "Red",
-        "horns": "True"
+        "url": "prulo.img"
     },
     "abilities": {
         "taunt": "True",

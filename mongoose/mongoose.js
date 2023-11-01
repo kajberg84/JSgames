@@ -18,8 +18,7 @@ const dbLogg = process.env.DB_CONNECTION_STRING
  */
 export const connectDB = async () => {
     // Bind connection to events (to get notifications).
-    mongoose.connection.on('connected', () => console.log('Connected to Mongo DB atlas')
-    )
+    mongoose.connection.on('connected', () => console.log('Connected to Mongo DB atlas'))
 
     mongoose.connection.on('error', err => console.error(`Mongoose connection error has occurred: ${err}`))
 
