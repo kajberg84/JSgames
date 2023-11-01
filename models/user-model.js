@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema({
             isAsync: false
         }
     },
-    password: { type: String, required: true, maxlength: 1000, minlength: [10, 'password to short'], trim: true },
+    password: { type: String, required: true, maxlength: 1000, minlength: [5, 'password to short'], trim: true },
     permissionLevel: Number,
     refToken: { type: String },
 })
@@ -18,3 +18,10 @@ const userSchema = mongoose.Schema({
 const UserModel = mongoose.model('UserModel', userSchema)
 
 export default UserModel
+
+1
+2
+3
+4
+5
+6

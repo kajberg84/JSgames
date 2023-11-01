@@ -8,15 +8,15 @@ const PermissionLevels = Object.freeze({
     CHILD: 1,
     GUEST: 2,
     OWNER: 4,
-    ADMIN: 8
+    ADMIN: 8,
+    SUPER_USER: 16,
 })
 
-// skapa en hasPermission i utils
-// skapa en authenticationToken (se vad som används nuförtiden. jwt fortfarande)
+// skapa en hasPermission i utils // skapa en authenticationToken (se vad som används nuförtiden. jwt fortfarande)
 // Skapa nedansteånde två routes. med ovanstående funktionalitet
 
-userRouter.get('/', (req, res, next) => controller.getUser(req, res, next))
 userRouter.post('/', (req, res, next) => controller.create(req, res, next))
-
-// delete user
+userRouter.get('/', (req, res, next) => controller.getUser(req, res, next))
+// update user
+// delete user permissionCheck   samma användare
 // ADMIN get all users.

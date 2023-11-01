@@ -8,11 +8,5 @@ export function hashPassword(userPassword) {
 }
 
 export function checkUserPassword(password, passwordHash) {
-    console.log(`password: ${password}, passwordHash: ${passwordHash}`)
-    /* if (password === passwordHash) {
-        return true
-    }
-    return false */
-    // använd bcrypt or password / dylikt
     return bcrypt.compareSync(password, passwordHash)
 }
