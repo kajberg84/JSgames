@@ -37,10 +37,3 @@ const userSchema = mongoose.Schema({
 const UserModel = mongoose.model('UserModel', userSchema)
 
 export default UserModel
-
-1
-2
-3
-4
-5
-6

@@ -68,12 +68,36 @@ export class UserController {
         }
     }
 
+    async getAll(req, res, next) {
+        try {
+            const users = await UserModel.find({});
+            res.status(200).json(users);
+        } catch (error) {
+            error.status = 404;
+            error.message = "No Users to show";
+            next(error);
+        }
+    }
+
     getById(req, res, next) {
         try {
             res.status(200).json(this.transformData(req.user));
         } catch (error) {
             error.status = 404;
             error.message = "No User to show";
+            next(error);
+        }
+    }
+    async delete(req, res, next) {
+        console.log("delete this user:", req.user);
+        const { id } = req.user
+        try {
+            await UserModel.deleteOne({ _id: id });
+            console.log("User deleted");
+            res.status(204).json("User deleted");
+        } catch (error) {
+            error.status = 404;
+            error.message = "No User to delete or error deleting user";
             next(error);
         }
     }
