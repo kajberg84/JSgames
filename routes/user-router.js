@@ -12,11 +12,29 @@ const PermissionLevels = Object.freeze({
     SUPER_USER: 16,
 })
 
-// skapa en hasPermission i utils // skapa en authenticationToken (se vad som används nuförtiden. jwt fortfarande)
-// Skapa nedansteånde två routes. med ovanstående funktionalitet
+
+// provide req.user to the route if :id is present in the route path
+userRouter.param('id', (req, res, next, id) => controller.loadUser(req, res, next, id))
+
+// TODO implement token
+const authAccessToken = true
 
 userRouter.post('/', (req, res, next) => controller.create(req, res, next))
 userRouter.get('/', (req, res, next) => controller.getUser(req, res, next))
+userRouter.get('/:id', (req, res, next) => controller.getById(req, res, next))
+
+// Delete user
+/*
+userRouter.delete('/',
+authAccessToken,
+    (req, res, next) => hasPermission(req, res, next, PermissionLevels.OWNER),
+    (req, res, next) => controller.delete(req, res, next)
+)
+userRouter.put('/',
+    authAccessToken,
+    (req, res, next) => hasPermission(req, res, next, PermissionLevels.OWNER),
+    (req, res, next) => controller.update(req, res, next)
+) */
 // update user
 // delete user permissionCheck   samma användare
 // ADMIN get all users.

@@ -3,10 +3,42 @@ import UserModel from "../models/user-model.js"
 import { hashPassword } from "../utilities/passwordHandler.js"
 
 export class UserController {
+    // Transforming incoming data
+    transformData(user) {
+        return {
+            id: user._id,
+            email: user.email,
+            permissionLevel: user.permissionLevel,
+            ingamename: user.ingamename,
+            refToken: user.refToken
+        };
+    }
+    async loadUser(req, res, next, id) {
+        try {
+            const user = await UserModel.findOne({ _id: id });
+            if (!user) {
+                next(createError(404));
+                return;
+            }
+            req.user = user;
+            next();
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async create(req, res, next) {
-        const { email, password } = req.body
+        const { firstname, lastname, address,
+            city, zipcode, phone, ingamename, email, password } = req.body
 
         const newUser = new UserModel({
+            firstname: firstname,
+            lastname: lastname,
+            address: address,
+            city: city,
+            zipcode: zipcode,
+            phone: phone,
+            ingamename: ingamename,
             email: email,
             password: hashPassword(password),
             permissionLevel: 4,
@@ -25,13 +57,25 @@ export class UserController {
     async getUser(req, res, next) {
         try {
             const userExists = await UserModel.findOne({ email: req.query.email })
-            console.log(userExists)
             if (userExists) {
-                return res.status(204).json("User exists")
+                return res.status(200).json(this.transformData(userExists))
+            } else {
+                return res.status(409).json("No user found")
             }
-            res.status(409).json("User dont exist")
         } catch (error) {
-
+            console.error("Error in database query:", error);
+            res.status(500).json({ message: "Internal server error" });
         }
     }
+
+    getById(req, res, next) {
+        try {
+            res.status(200).json(this.transformData(req.user));
+        } catch (error) {
+            error.status = 404;
+            error.message = "No User to show";
+            next(error);
+        }
+    }
+
 }
