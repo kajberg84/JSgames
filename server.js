@@ -3,6 +3,9 @@ import logger from 'morgan'
 import { router } from './routes/router.js'
 import { connectDB } from './mongoose/mongoose.js'
 
+// decide session handling.- jwt / cockies?
+// implement security? helmet or other newer. investigate.
+
 const main = async () => {
 
     //Connect to DB

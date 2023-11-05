@@ -2,15 +2,34 @@ import mongoose from 'mongoose'
 import validator from 'validator'
 
 const userSchema = mongoose.Schema({
-    email: {
-        type: String, required: true, maxlength: 100, unique: true, trim: true,
-        validate: {
-            validator: validator.isEmail,
-            message: "Not a valid email",
-            isAsync: false
-        }
+    firstname: {
+        type: String, required: true, trim: true, maxLength: 1000,
     },
-    password: { type: String, required: true, maxlength: 1000, minlength: [5, 'password to short'], trim: true },
+    lastname: {
+        type: String, required: true, trim: true, maxLength: 1000,
+    },
+    address: {
+        type: String, required: true, trim: true, maxLength: 1000,
+    },
+    city: {
+        type: String, required: true, trim: true, maxLength: 50,
+    },
+    zipcode: {
+        type: Number, required: true, trim: true, maxLength: 100,
+    },
+    phone: {
+        type: Number, required: true, trim: true, maxLength: 50,
+    },
+    ingamename: {
+        type: String, required: true, trim: true, maxLength: [20, 'password to short'], unique: true,
+    },
+    email: {
+        type: String, required: true, trim: true, maxlength: 100, unique: true,
+        validator: validator.isEmail,
+        message: "Not a valid email",
+        isAsync: false
+    },
+    password: { type: String, required: true, trim: true, maxlength: 1000, minlength: [5, 'password to short'], },
     permissionLevel: Number,
     refToken: { type: String },
 })

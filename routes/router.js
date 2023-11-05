@@ -9,6 +9,5 @@ export const router = express.Router()
 router.use("/", homeRouter)
 router.use("/login", loginRouter)
 router.use("/user", userRouter)
-router.use("/hangMan", userRouter)
 
 router.use('*', (req, res, next) => next(createError(404)))

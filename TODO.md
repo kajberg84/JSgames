@@ -1,16 +1,37 @@
-0. create github
-1. create a basic server.js express på and running
-2. add routing.
-    login get
-    user get post
-3. mock a database.
-4. localstorage / mongo db
-5. frontend for this app. react? svelte?
+# frontend for this app. react? svelte? html/css ?
 
+# server.js
+# decide session handling.- jwt / cockies?
+# implement security? helmet or other newer. investigate.
 
-add mongoose / mongodb
-controller
-models/schemas
-# add encrypting to password
-# create mongo db database
-add .env file
+# frontend
+    * html css prulo
+
+# USERS
+    * user-model
+        add name, adress, phonenumber, gender etc.
+
+    * User controller. change in create user to implement new model
+
+    * routes:
+    * user-router.js
+        implement param id
+        delete by id
+        admin get all
+        get user by id
+        put/patch user
+
+    * User controller. Add functions to above user-routes.
+# TOKENS
+    decide session
+        create routes
+        create controller
+        create functions in controller for routes
+
+# Cards
+    * investigate card router. Think of how to make this the best way.
+    * maybe one card-router where implemente create,read,update,delete card(s).
+    * create model for card
+    * create functions for crud routes.
+    *
+
