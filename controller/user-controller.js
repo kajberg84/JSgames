@@ -21,6 +21,7 @@ export class UserController {
                 return;
             }
             req.user = user;
+            console.log("Load user = req.user: ", req.user)
             next();
         } catch (error) {
             next(error);
@@ -74,30 +75,36 @@ export class UserController {
             res.status(200).json(users);
         } catch (error) {
             error.status = 404;
+            error.message = error.message;
+            next(error);
+        }
+    }
+
+    async getById(req, res, next) {
+        try {
+            res.status(200).json(this.transformData(req.user));
+        } catch (error) {
+            error.status = 404;
             error.message = "No Users to show";
             next(error);
         }
     }
 
-    getById(req, res, next) {
-        try {
-            res.status(200).json(this.transformData(req.user));
-        } catch (error) {
-            error.status = 404;
-            error.message = "No User to show";
-            next(error);
-        }
-    }
     async delete(req, res, next) {
-        console.log("delete this user:", req.user);
         const { id } = req.user
         try {
-            await UserModel.deleteOne({ _id: id });
-            console.log("User deleted");
+            if (id === req.authUser.userId) {
+                await UserModel.deleteOne({ _id: id });
+            } else if (req.authUser.permissionLevel === 16) {
+                console.log(`Admin ${req.authUser.firstname} ${req.authUser.lastname} deleted user: ${id}`)
+                await UserModel.deleteOne({ _id: id });
+            } else {
+                throw new Error()
+            }
             res.status(204).json("User deleted");
         } catch (error) {
             error.status = 404;
-            error.message = "No User to delete or error deleting user";
+            error.message = "Not permitted";
             next(error);
         }
     }
